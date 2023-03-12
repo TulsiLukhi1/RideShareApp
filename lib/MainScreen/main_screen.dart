@@ -30,32 +30,57 @@ class _MainScreenState extends State<MainScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: TabBarView(
-          physics: const NeverScrollableScrollPhysics(),
-          controller: tabController,
-          children: const [HomeTabScreen(), AccountTabScreen()],
+      body: TabBarView(
+        physics: const NeverScrollableScrollPhysics(),
+        controller: tabController,
+        children: const [
+          HomeTabScreen(),
+          AccountTabScreen(),
+          AccountTabScreen(),
+        ],
+      ),
+      bottomNavigationBar: Container(
+        height: 50,
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(colors: [
+            Color.fromARGB(255, 100, 145, 236),
+            Color.fromARGB(255, 69, 204, 231),
+          ]),
         ),
-        bottomNavigationBar: GNav(gap: 8, tabs: const [
-          GButton(
-            icon: Icons.home,
-            text: 'Home',
-          ),
-          GButton(
-            icon: Icons.account_balance,
-            text: 'Organization',
-          ),
-          GButton(
-            icon: Icons.person,
-            text: 'Profile',
-          ),
-        ]));
+        child: GNav(
+            onTabChange: onItemClick,
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+            tabBackgroundGradient: LinearGradient(colors: [
+              const Color.fromARGB(255, 100, 145, 236).withOpacity(0.3),
+              const Color.fromARGB(255, 69, 204, 231).withOpacity(0.3),
+            ]),
+            backgroundColor: Colors.white,
+            color: const Color.fromARGB(255, 100, 145, 236),
+            activeColor: const Color.fromARGB(255, 100, 145, 236),
+            gap: 8,
+            tabs: const [
+              GButton(
+                icon: Icons.home,
+                text: 'Home',
+              ),
+              GButton(
+                icon: Icons.account_balance,
+                text: 'Organization',
+              ),
+              GButton(
+                icon: Icons.person,
+                text: 'Profile',
+              ),
+            ]),
+      ),
+    );
   }
 }
 
 // bottomNavigationBar: BottomNavigationBar(
 //         items:const [
 //           BottomNavigationBarItem(
-              
+
 //               icon: Icon(Icons.home),
 //               label: "Home"),
 //           BottomNavigationBarItem(icon: Icon(Icons.person), label: "Account"),

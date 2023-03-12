@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rideshare/Screens/request_ride.dart';
-
 import 'package:rideshare/Screens/shareride.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../Utills/utills.dart';
 
 class HomeTabScreen extends StatefulWidget {
@@ -20,49 +18,69 @@ class _HomeTabScreenState extends State<HomeTabScreen>
   final toController = TextEditingController();
   Color colorPrimary = Colors.blue;
   TabController? tabController;
-  int selectedIndex = 0;
+  int? selectedIndex = 0;
+
+  int count = 0;
+
+  onItemClick(int index) {
+    setState(() {
+      selectedIndex = index;
+      tabController!.index = index;
+    });
+  }
 
   @override
   void initState() {
     super.initState();
+    fromController.addListener(_onFieldChanged);
+    toController.addListener(_onFieldChanged);
     tabController = TabController(length: 2, vsync: this);
   }
 
+  @override
+  void dispose() {
+    fromController.dispose();
+    toController.dispose();
+    super.dispose();
+  }
+
+  void _onFieldChanged() {
+    if (count == 0) {
+      if (fromController.text.isNotEmpty && toController.text.isNotEmpty) {
+        print("------------------------------onfieldchanged");
+        if (selectedIndex == 0) {
+          print(selectedIndex);
+          shareRide();
+        } else {
+          requestRide();
+        }
+        setState(() {
+          count = 1;
+        });
+      }
+    }
+  }
+
   void shareRide() {
-    setState(() {
-      isLoading = true;
-    });
     Navigator.of(context)
         .push(MaterialPageRoute(
-            builder: (BuildContext context) => const ShareRide()))
-        .then((value) {
-      setState(() {
-        isLoading = false;
-      });
-    }).catchError((error) {
+            builder: (BuildContext context) => ShareRide(
+                  from: fromController.text,
+                  to: toController.text,
+                )))
+        .then((value) {})
+        .catchError((error) {
       Utills().toastFaiureMessage(error.message);
-      setState(() {
-        isLoading = false;
-      });
     });
   }
 
   void requestRide() {
-    setState(() {
-      isLoading = true;
-    });
     Navigator.of(context)
         .push(MaterialPageRoute(
             builder: (BuildContext context) => const RequestRideScreen()))
-        .then((value) {
-      setState(() {
-        isLoading = false;
-      });
-    }).catchError((error) {
+        .then((value) {})
+        .catchError((error) {
       Utills().toastFaiureMessage(error.message);
-      setState(() {
-        isLoading = false;
-      });
     });
   }
 
@@ -105,6 +123,12 @@ class _HomeTabScreenState extends State<HomeTabScreen>
           ),
         ],
       ),
+      // body: FlutterMap(
+      //   options: MapOptions(
+      //     center: LatLng(51.509364, -0.128928),
+      //     zoom: 9.2,
+      //   ),
+      // ),
       bottomSheet: Container(
           width: MediaQuery.of(context).size.width,
           height: 220,
@@ -136,6 +160,7 @@ class _HomeTabScreenState extends State<HomeTabScreen>
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     TabBar(
+                      onTap: onItemClick,
                       unselectedLabelColor:
                           const Color.fromARGB(255, 81, 187, 213),
                       indicator: BoxDecoration(
@@ -196,7 +221,7 @@ class _HomeTabScreenState extends State<HomeTabScreen>
                             children: [
                               TextFormField(
                                 controller: fromController,
-                                keyboardType: TextInputType.emailAddress,
+                                keyboardType: TextInputType.text,
                                 validator: (value) {
                                   if (value!.isEmpty) {
                                     return "Please enter From field";
@@ -250,7 +275,70 @@ class _HomeTabScreenState extends State<HomeTabScreen>
                               ),
                             ],
                           ),
-                        )
+                        ),
+                        ////////////////////////
+                        Container(
+                          padding:
+                              const EdgeInsets.only(left: 20.0, right: 20.0),
+                          child: Column(
+                            children: [
+                              TextFormField(
+                                controller: fromController,
+                                keyboardType: TextInputType.text,
+                                validator: (value) {
+                                  if (value!.isEmpty) {
+                                    return "Please enter From field";
+                                  } else {
+                                    return null;
+                                  }
+                                },
+                                decoration: InputDecoration(
+                                    labelText: 'From',
+                                    labelStyle: const TextStyle(
+                                        fontFamily: 'Montserrat',
+                                        fontWeight: FontWeight.bold,
+                                        color:
+                                            Color.fromARGB(255, 203, 202, 202)),
+                                    prefixIcon: Icon(
+                                      Icons.circle,
+                                      color: Colors.green.withOpacity(0.3),
+                                      size: 15,
+                                    ),
+                                    focusedBorder: const UnderlineInputBorder(
+                                        borderSide: BorderSide(
+                                            color: Color.fromARGB(
+                                                255, 203, 202, 202)))),
+                              ),
+                              const SizedBox(height: 10.0),
+                              TextFormField(
+                                controller: toController,
+                                keyboardType: TextInputType.text,
+                                validator: (value) {
+                                  if (value!.isEmpty) {
+                                    return "Please enter destination field";
+                                  } else {
+                                    return null;
+                                  }
+                                },
+                                decoration: InputDecoration(
+                                    labelText: 'To ',
+                                    prefixIcon: Icon(
+                                      Icons.circle,
+                                      color: Colors.red.withOpacity(0.3),
+                                      size: 15,
+                                    ),
+                                    labelStyle: const TextStyle(
+                                        fontFamily: 'Montserrat',
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.grey),
+                                    focusedBorder: const UnderlineInputBorder(
+                                        borderSide: BorderSide(
+                                            color: Color.fromARGB(
+                                                255, 203, 202, 202)))),
+                              ),
+                            ],
+                          ),
+                        ),
                       ]),
                     )
                   ]),

@@ -3,11 +3,14 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:rideshare/Screens/cardetails.dart';
+import 'package:rideshare/TabPages/home_tab.dart';
 import 'package:rideshare/Utills/utills.dart';
 import '../MainScreen/main_screen.dart';
 
 class ShareRide extends StatefulWidget {
-  const ShareRide({super.key});
+  final String from;
+  final String to;
+  const ShareRide({super.key, required this.from, required this.to});
 
   @override
   State<ShareRide> createState() => _ShareRideState();
@@ -47,6 +50,8 @@ class _ShareRideState extends State<ShareRide> {
         "--------------------------------inside initstate---------------------------------");
     print(uid);
     checkCarDetails(uid);
+    fromController.text = widget.from;
+    toController.text = widget.to;
     dateController.text = "";
     Future.delayed(Duration.zero, () {
       _showBottomSheet(context);
@@ -63,8 +68,8 @@ class _ShareRideState extends State<ShareRide> {
   }
 
   checkCarDetails(String? uid) async {
-    print("here");
-
+    print("here--------------cardefault");
+    print("1----------------");
     DatabaseReference ref = FirebaseDatabase.instance.ref("CarInfo");
 
     Query query = ref.orderByChild("id").equalTo(uid);
@@ -72,6 +77,8 @@ class _ShareRideState extends State<ShareRide> {
     print(dataSnapshot.value);
     if (dataSnapshot.value != null) {
       setState(() {
+        print("2-----------------------");
+        print("-----------------iniside setstate");
         isCarAdded = true;
       });
       (dataSnapshot.value as Map<dynamic, dynamic>).forEach((key, value) {
@@ -79,7 +86,7 @@ class _ShareRideState extends State<ShareRide> {
         carmodel = value['carModel'];
         carnumber = value['carNumber'];
         seats = value['Seats'];
-
+        print("3----------------");
         print(carmodel);
         print(isDefault);
       });
@@ -110,9 +117,9 @@ class _ShareRideState extends State<ShareRide> {
       });
 
       Utills().toastSuccessMessage("Information added successfully!");
-
+//////////changef from shareride screen..........
       Navigator.of(context).pushReplacement(MaterialPageRoute(
-          builder: (BuildContext context) => const ShareRide()));
+          builder: (BuildContext context) => const HomeTabScreen()));
     }).catchError((error) {
       Utills().toastFaiureMessage(error.message);
       setState(() {
@@ -319,10 +326,16 @@ class _ShareRideState extends State<ShareRide> {
                                       borderRadius: BorderRadius.circular(20)),
                                 ),
                                 onPressed: () {
-                                  Navigator.of(context).pushReplacement(
-                                      MaterialPageRoute(
-                                          builder: (BuildContext context) =>
-                                              const CarDetailScreen()));
+                                  // Navigator.of(context).push(MaterialPageRoute(
+                                  //     builder: (BuildContext context) =>
+                                  //         const CarDetailScreen()));
+                                  Navigator.pushNamed(
+                                          context, "/carDetailScreen")
+                                      .then((value) {
+                                    if (value != null) {
+                                      initState();
+                                    } // if true and you have come back to your Settings screen
+                                  });
                                 },
                                 child: Center(
                                   child: isLoading
@@ -331,7 +344,7 @@ class _ShareRideState extends State<ShareRide> {
                                           color: Colors.white,
                                         )
                                       : const Text(
-                                          'ADD ',
+                                          'ADD Car',
                                           style: TextStyle(
                                               color: Colors.white,
                                               fontWeight: FontWeight.bold,

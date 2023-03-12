@@ -5,9 +5,6 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:rideshare/Screens/shareride.dart';
-import 'package:rideshare/backup%20files/shareride.dart';
-
-import '../Auth/signupscreen.dart';
 import '../Utills/utills.dart';
 
 class CarDetailScreen extends StatefulWidget {
@@ -46,12 +43,17 @@ class _CarDetailScreenState extends State<CarDetailScreen> {
         isLoading = false;
       });
 
-      Utills().toastSuccessMessage("Car Information added successfully!");
+      // Navigator.pushNamed(context, "/editScreen").then((value) {
+      //   if (value) // if true and you have come back to your Settings screen
+      //     yourSharedPreferenceCode();
+      // });
 
-      Navigator.of(context)
-          .pushReplacement(MaterialPageRoute(
-              builder: (BuildContext context) => const ShareRide()))
-          .then(onGoBack);
+      Utills().toastSuccessMessage("Car Information added successfully!");
+      Navigator.pop(context);
+      // Navigator.of(context)
+      //     .pushReplacement(MaterialPageRoute(
+      //         builder: (BuildContext context) => const ShareRide()))
+      //     .then(onGoBack);
     }).catchError((error) {
       Utills().toastFaiureMessage(error.message);
       setState(() {
