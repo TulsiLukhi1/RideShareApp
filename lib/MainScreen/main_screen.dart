@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 
+import '../Screen/maintabscreen.dart';
 import '../TabPages/account_tab.dart';
 import '../TabPages/home_tab.dart';
 
@@ -11,20 +12,20 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreenState extends State<MainScreen>
     with SingleTickerProviderStateMixin {
-  TabController? tabController;
+  late TabController tabController;
   int selectedIndex = 0;
 
   onItemClick(int index) {
     setState(() {
       selectedIndex = index;
-      tabController!.index = index;
+      tabController.index = index;
     });
   }
 
   @override
   void initState() {
     super.initState();
-    tabController = TabController(length: 4, vsync: this);
+    tabController = TabController(length: 3, vsync: this);
   }
 
   @override
@@ -34,7 +35,7 @@ class _MainScreenState extends State<MainScreen>
         physics: const NeverScrollableScrollPhysics(),
         controller: tabController,
         children: const [
-          HomeTabScreen(),
+          ScreenHomeTab(),
           AccountTabScreen(),
           AccountTabScreen(),
         ],

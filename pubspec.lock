@@ -81,6 +81,22 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.5"
+  date_time_picker:
+    dependency: "direct main"
+    description:
+      name: date_time_picker
+      sha256: "6923c568bcb67a66ab7e083708d0adbcae8214b41bb84d49febc17e89e06fc4a"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.1.0"
+  day_picker:
+    dependency: "direct main"
+    description:
+      name: day_picker
+      sha256: e2b177625c3866964ae2314cd800b1260df684eb18741be64cb73e1c07b2c7b8
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.1.1"
   dots_indicator:
     dependency: "direct main"
     description:
@@ -214,6 +230,22 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_cupertino_datetime_picker:
+    dependency: "direct main"
+    description:
+      name: flutter_cupertino_datetime_picker
+      sha256: "631fbd3abed4d1151888e053d2153d905663a3b33ff24bdfa64afbcf750682cb"
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.0.0"
+  flutter_image:
+    dependency: "direct main"
+    description:
+      name: flutter_image
+      sha256: "3161bf96fef90ec6d46a43879001d8a4c07aaa9d0aa2bd8ee85311f3b517e25f"
+      url: "https://pub.dev"
+    source: hosted
+    version: "4.1.5"
   flutter_image_compress:
     dependency: "direct main"
     description:
@@ -231,7 +263,7 @@ packages:
     source: hosted
     version: "2.0.1"
   flutter_map:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: flutter_map
       sha256: "59dfd14267b691bea55760786b47d3172d47cdcc0d79ff930746a5ad123491b8"
@@ -264,6 +296,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "10.4.0"
+  geocoder:
+    dependency: "direct main"
+    description:
+      name: geocoder
+      sha256: bd1cc3e349459b75f8baadfb00eb009b6a5c82f5167bca251e2e2b9c1f06dd0a
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.2.1"
   get_it:
     dependency: "direct main"
     description:
@@ -313,7 +353,7 @@ packages:
     source: hosted
     version: "0.6.5"
   latlong2:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: latlong2
       sha256: "408993a0e3f46e79ce1f129e4cb0386eef6d48dfa6394939ecacfbd7049154ec"
@@ -497,7 +537,7 @@ packages:
     source: hosted
     version: "1.0.1"
   positioned_tap_detector_2:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: positioned_tap_detector_2
       sha256: "52e06863ad3e1f82b058fd05054fc8c9caeeb3b47d5cea7a24bd9320746059c1"
@@ -513,7 +553,7 @@ packages:
     source: hosted
     version: "4.2.4"
   proj4dart:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: proj4dart
       sha256: c8a659ac9b6864aa47c171e78d41bbe6f5e1d7bd790a5814249e6b68bc44324e
@@ -573,8 +613,16 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.4.16"
+  transparent_image:
+    dependency: "direct main"
+    description:
+      name: transparent_image
+      sha256: e8991d955a2094e197ca24c645efec2faf4285772a4746126ca12875e54ca02f
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.1"
   tuple:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: tuple
       sha256: "0ea99cd2f9352b2586583ab2ce6489d1f95a5f6de6fb9492faaf97ae2060f0aa"
@@ -598,13 +646,21 @@ packages:
     source: hosted
     version: "0.3.1"
   vector_math:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: vector_math
       sha256: "80b3257d1492ce4d091729e3a67a60407d227c27241d6927be0130c98e741803"
       url: "https://pub.dev"
     source: hosted
     version: "2.1.4"
+  weekday_selector:
+    dependency: "direct main"
+    description:
+      name: weekday_selector
+      sha256: "783954997aa30a8890b24196784543752dbf179282ca4d9139ecd70d63fea99e"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.1.0"
   win32:
     dependency: transitive
     description:
@@ -630,5 +686,5 @@ packages:
     source: hosted
     version: "1.0.0"
 sdks:
-  dart: ">=2.19.0 <4.0.0"
+  dart: ">=2.19.0 <3.0.0"
   flutter: ">=3.3.0"
