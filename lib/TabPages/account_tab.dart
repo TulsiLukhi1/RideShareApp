@@ -1,8 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:rideshare/Screens/update_profile.dart';
 
 import '../Auth/loginscreen.dart';
+import '../Screen/updateprofile.dart';
 import '../Utills/utills.dart';
 
 class AccountTabScreen extends StatefulWidget {

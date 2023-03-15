@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_cupertino_datetime_picker/flutter_cupertino_datetime_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:rideshare/MainScreen/main_screen.dart';
-import '../Screens/cardetails.dart';
+import 'package:rideshare/Screen/cardetailsscreen.dart';
 import '../Utills/utills.dart';
 import '../Widgets/mybutton.dart';
 
