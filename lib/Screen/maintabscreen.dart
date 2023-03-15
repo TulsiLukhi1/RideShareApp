@@ -169,18 +169,24 @@ class _ScreenHomeTabState extends State<ScreenHomeTab>
             zoom: 9.2,
           ),
 
-          // layers: [
-          //   TileLayerOptions(
-          //     urlTemplate: "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
-          //     userAgentPackageName: 'com.example.app',
-          //   ),
-          // ],
-          // nonRotatedChildren: [
-          //   AttributionWidget.defaultWidget(
-          //     source: 'OpenStreetMap contributors',
-          //     onSourceTapped: null,
-          //   ),
-          // ],
+          /*layers: [
+             TileLayerOptions(
+               urlTemplate: "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+               userAgentPackageName: 'com.example.app',
+             ),
+           ],*/
+          nonRotatedChildren: [
+            AttributionWidget.defaultWidget(
+              source: 'OpenStreetMap contributors',
+              onSourceTapped: null,
+            ),
+          ],
+          children: [
+            TileLayer(
+              urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+              userAgentPackageName: 'com.example.rideshare',
+            ),
+          ],
         ));
   }
 }

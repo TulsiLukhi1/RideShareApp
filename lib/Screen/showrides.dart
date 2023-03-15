@@ -18,20 +18,22 @@ class _ShowRideScreenState extends State<ShowRideScreen> {
   final _auth = FirebaseAuth.instance;
   var from;
   var to;
+  User? user;
+  var uid;
 
   @override
   void initState() {
     super.initState();
-    final User? user = _auth.currentUser;
-    final uid = user?.uid;
+    user = _auth.currentUser;
+    uid = user?.uid;
     from = widget.from;
     to = widget.to;
-    searchRide(uid, from, to);
   }
 
   List<Map<String, dynamic>> data = [];
 
-  void searchRide(String? uid, String from, String to) async {
+  Future<List<Map<String, dynamic>>> searchRide(
+      String? uid, String from, String to) async {
     DatabaseReference ref = FirebaseDatabase.instance.ref("ShareRideInfo");
 
     Query query = ref.orderByChild("id").equalTo(uid);
@@ -62,6 +64,7 @@ class _ShowRideScreenState extends State<ShowRideScreen> {
     } else {
       print('No data found');
     }
+    return data;
   }
 
   @override
@@ -89,74 +92,83 @@ class _ShowRideScreenState extends State<ShowRideScreen> {
         ),
         title: const Text("Carpool"),
       ),
-      body: ListView.builder(
-        itemCount: data.length,
-        itemBuilder: (context, index) {
-          return Container(
-            // padding: EdgeInsets.only(top: 15),
-            decoration: const BoxDecoration(
-              boxShadow: [
-                BoxShadow(
-                  color: Color.fromARGB(255, 208, 208, 208),
-                  blurRadius: 5.0, // soften the shadow
-                  spreadRadius: 5.0, //extend the shadow
-                  offset: Offset(
-                    5.0, // Move to right 5  horizontally
-                    5.0, // Move to bottom 5 Vertically
-                  ),
-                )
-              ],
-              color: Colors.white,
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(30.0),
-                topRight: Radius.circular(30.0),
-              ),
-            ),
-            child: ListTile(
-              leading: CircleAvatar(
-                //here there will be user photo
-                backgroundColor: Colors.blueGrey,
-                foregroundColor: Colors.white,
-                //here there will be user photo
-                child: Text(data[index]['from'][0]),
-              ),
-              title: Text(
-                data[index]['to'],
-                style: const TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 18,
-                ),
-              ),
-              subtitle: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'From: ${data[index]['from']}',
-                    style: const TextStyle(
-                      fontSize: 16,
+      body: FutureBuilder(
+        future: searchRide(uid, from, to),
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            return ListView.builder(
+              itemCount: snapshot.data?.length,
+              itemBuilder: (context, index) {
+                return Container(
+                  // padding: EdgeInsets.only(top: 15),
+                  decoration: const BoxDecoration(
+                    boxShadow: [
+                      BoxShadow(
+                        color: Color.fromARGB(255, 208, 208, 208),
+                        blurRadius: 5.0, // soften the shadow
+                        spreadRadius: 5.0, //extend the shadow
+                        offset: Offset(
+                          5.0, // Move to right 5  horizontally
+                          5.0, // Move to bottom 5 Vertically
+                        ),
+                      )
+                    ],
+                    color: Colors.white,
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(30.0),
+                      topRight: Radius.circular(30.0),
                     ),
                   ),
-                  const SizedBox(
-                    height: 4,
-                  ),
-                  Text(
-                    '${data[index]['date']} ${data[index]['time']}',
-                    style: TextStyle(
+                  child: ListTile(
+                    leading: CircleAvatar(
+                      //here there will be user photo
+                      backgroundColor: Colors.blueGrey,
+                      foregroundColor: Colors.white,
+                      //here there will be user photo
+                      child: Text(snapshot.data?[index]['from'][0]),
+                    ),
+                    title: Text(
+                      snapshot.data?[index]['to'],
+                      style: const TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 18,
+                      ),
+                    ),
+                    subtitle: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'From: ${snapshot.data?[index]['from']}',
+                          style: const TextStyle(
+                            fontSize: 16,
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 4,
+                        ),
+                        Text(
+                          '${snapshot.data?[index]['date']} ${snapshot.data?[index]['time']}',
+                          style: TextStyle(
+                            color: Colors.grey[600],
+                            fontSize: 14,
+                          ),
+                        ),
+                      ],
+                    ),
+                    trailing: Icon(
+                      Icons.arrow_forward_ios,
                       color: Colors.grey[600],
-                      fontSize: 14,
                     ),
+                    onTap: () {
+                      // handle item tap
+                    },
                   ),
-                ],
-              ),
-              trailing: Icon(
-                Icons.arrow_forward_ios,
-                color: Colors.grey[600],
-              ),
-              onTap: () {
-                // handle item tap
+                );
               },
-            ),
-          );
+            );
+          } else {
+            return Container();
+          }
         },
       ),
     );
