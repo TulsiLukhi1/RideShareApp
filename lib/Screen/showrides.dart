@@ -20,6 +20,7 @@ class _ShowRideScreenState extends State<ShowRideScreen> {
   var to;
   User? user;
   var uid;
+  int count = 0;
 
   @override
   void initState() {
@@ -36,28 +37,43 @@ class _ShowRideScreenState extends State<ShowRideScreen> {
       String? uid, String from, String to) async {
     DatabaseReference ref = FirebaseDatabase.instance.ref("ShareRideInfo");
 
+    DatabaseReference userRef = FirebaseDatabase.instance.ref("UserInfo");
+
     Query query = ref.orderByChild("id").equalTo(uid);
     DataSnapshot dataSnapshot = await query.get();
 
     print(dataSnapshot.value);
 
     if (dataSnapshot.value != null) {
-      (dataSnapshot.value as Map<dynamic, dynamic>).forEach((key, value) {
+      (dataSnapshot.value as Map<dynamic, dynamic>).forEach((key, value) async {
+        var id = value['id'];
         var fromValue = value['from'];
         var toValue = value['to'];
 
-        print("-------------------inside searchride");
-        print(fromValue);
-        print(toValue);
+        var name;
+        var profession;
+        var title;
+        Query uquery = userRef.orderByChild("id").equalTo(uid);
+        DataSnapshot udataSnapshot = await uquery.get();
+        print(udataSnapshot.value);
+        if (udataSnapshot.value != null) {
+          (udataSnapshot.value as Map<dynamic, dynamic>).forEach((key, value) {
+            name = value['name'];
+            profession = value['profession'];
+            title = value['title'];
+          });
+        }
 
         if (fromValue.toString().toLowerCase().contains(from.toLowerCase()) &&
             toValue.toString().toLowerCase().contains(to.toLowerCase())) {
-          print("-----------------inside if");
           data.add({
             "from": fromValue,
             "to": toValue,
             "date": value['date'],
-            "time": value['time']
+            "time": value['time'],
+            "name": name,
+            "profession": profession,
+            "title": title,
           });
         }
       });
@@ -102,16 +118,17 @@ class _ShowRideScreenState extends State<ShowRideScreen> {
                 return Container(
                   // padding: EdgeInsets.only(top: 15),
                   decoration: const BoxDecoration(
+                    // border: Border(bottom: BorderSide(color: Colors.black)),
                     boxShadow: [
-                      BoxShadow(
-                        color: Color.fromARGB(255, 208, 208, 208),
-                        blurRadius: 5.0, // soften the shadow
-                        spreadRadius: 5.0, //extend the shadow
-                        offset: Offset(
-                          5.0, // Move to right 5  horizontally
-                          5.0, // Move to bottom 5 Vertically
-                        ),
-                      )
+                      // BoxShadow(
+                      //   color: Color.fromARGB(255, 208, 208, 208),
+                      //   blurRadius: 2.0, // soften the shadow
+                      //   spreadRadius: 5.0, //extend the shadow
+                      //   offset: Offset(
+                      //     5.0, // Move to right 5  horizontally
+                      //     5.0, // Move to bottom 5 Vertically
+                      //   ),
+                      // )
                     ],
                     color: Colors.white,
                     borderRadius: BorderRadius.only(
@@ -125,10 +142,11 @@ class _ShowRideScreenState extends State<ShowRideScreen> {
                       backgroundColor: Colors.blueGrey,
                       foregroundColor: Colors.white,
                       //here there will be user photo
-                      child: Text(snapshot.data?[index]['from'][0]),
+                      child: Text(snapshot.data?[index]['name'][0]),
                     ),
                     title: Text(
-                      snapshot.data?[index]['to'],
+                      '${snapshot.data?[index]['name']} - ${snapshot.data?[index]['profession']} ',
+                      // snapshot.data?[index]['Name'],
                       style: const TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 18,
@@ -138,7 +156,7 @@ class _ShowRideScreenState extends State<ShowRideScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'From: ${snapshot.data?[index]['from']}',
+                          'From: ${snapshot.data?[index]['from']},To: ${snapshot.data?[index]['to']}',
                           style: const TextStyle(
                             fontSize: 16,
                           ),

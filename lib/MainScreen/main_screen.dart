@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
+import 'package:rideshare/Screen/decisonscreen.dart';
 
 import '../Screen/maintabscreen.dart';
-import '../TabPages/account_tab.dart';
-import '../TabPages/home_tab.dart';
+// import '../TabPages/account_tab.dart';
+import '../TabPages/acc_tab.dart';
 
 class MainScreen extends StatefulWidget {
   @override
@@ -36,8 +37,9 @@ class _MainScreenState extends State<MainScreen>
         controller: tabController,
         children: const [
           ScreenHomeTab(),
-          AccountTabScreen(),
-          AccountTabScreen(),
+          // AccountTabScreen(),
+          ScreenHomeTab(),
+          RenderScreen(),
         ],
       ),
       bottomNavigationBar: Container(
@@ -77,21 +79,3 @@ class _MainScreenState extends State<MainScreen>
     );
   }
 }
-
-// bottomNavigationBar: BottomNavigationBar(
-//         items:const [
-//           BottomNavigationBarItem(
-
-//               icon: Icon(Icons.home),
-//               label: "Home"),
-//           BottomNavigationBarItem(icon: Icon(Icons.person), label: "Account"),
-//         ],
-//         unselectedItemColor: Color.fromARGB(255, 203, 188, 188),
-//         selectedItemColor: Color.fromARGB(255, 100, 145, 236),
-//         backgroundColor: Colors.white,
-//         type: BottomNavigationBarType.fixed,
-//         selectedLabelStyle: const TextStyle(fontSize: 14),
-//         showUnselectedLabels: true,
-//         currentIndex: selectedIndex,
-//         onTap: onItemClick,
-//       ),

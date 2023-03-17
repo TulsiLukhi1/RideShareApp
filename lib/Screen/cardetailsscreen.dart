@@ -43,11 +43,6 @@ class _CarDetailScreenState extends State<CarDetailScreen> {
         isLoading = false;
       });
 
-      // Navigator.pushNamed(context, "/editScreen").then((value) {
-      //   if (value) // if true and you have come back to your Settings screen
-      //     yourSharedPreferenceCode();
-      // });
-
       Utills().toastSuccessMessage("Car Information added successfully!");
       Navigator.pop(context);
       // Navigator.of(context)

@@ -53,6 +53,8 @@ class _SignUpPageState extends State<SignUpPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
+      resizeToAvoidBottomInset: false,
       body: SingleChildScrollView(
         child: Form(
           key: _formKey,
@@ -61,41 +63,48 @@ class _SignUpPageState extends State<SignUpPage> {
               const SizedBox(
                 height: 100,
               ),
+              Image(
+                //
+                height: 250,
+
+                image: AssetImage("assets/images/signUp.jpg"),
+              ),
               Row(
                 children: const [
                   Padding(
                     padding: EdgeInsets.fromLTRB(26, 10, 0.0, 0.0),
                     child: Text(
-                      "Create",
+                      "Create Account ",
                       style: TextStyle(
                         fontFamily: "Montserrat",
-                        fontSize: 60,
+                        fontSize: 30,
                         fontWeight: FontWeight.w700,
-                        color: Colors.black,
+                        color: Colors.indigo,
                       ),
                     ),
                   )
                 ],
               ),
-              Row(
-                children: const [
-                  Padding(
-                    padding: EdgeInsets.fromLTRB(26, 0.0, 8.0, 0.0),
-                    child: Text(
-                      "Account",
-                      style: TextStyle(
-                        fontFamily: "Montserrat",
-                        fontSize: 60,
-                        fontWeight: FontWeight.w700,
-                        color: Colors.black,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
+              SizedBox(height: 20),
               Container(
-                padding:
-                    const EdgeInsets.only(top: 35.0, left: 20.0, right: 20.0),
+                //padding: const EdgeInsets.only(top: 35.0, left: 20.0, right: 20.0),
+                padding: EdgeInsets.fromLTRB(30.0, 10.0, 30.0, 10.0),
+                width: 320.0,
+                height: 500.0,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(20.0),
+                  boxShadow: [
+                    BoxShadow(
+                        color: Colors.black12,
+                        offset: Offset(0.0, 15.0),
+                        blurRadius: 15.0),
+                    BoxShadow(
+                        color: Colors.black12,
+                        offset: Offset(0.0, -10.0),
+                        blurRadius: 10.0)
+                  ],
+                ),
                 child: Column(
                   children: [
                     TextFormField(
