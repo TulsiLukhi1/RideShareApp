@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:rideshare/Auth/signupscreen.dart';
 import 'package:rideshare/MainScreen/main_screen.dart';
 import '../Utills/utills.dart';
+import '../Widgets/mybutton.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -62,12 +63,10 @@ class _LoginPageState extends State<LoginPage> {
           child: Container(
             child: Column(children: [
               const SizedBox(
-                height: 100,
+                height: 0,
               ),
-              Image(
-                //
+              const Image(
                 height: 250,
-
                 image: AssetImage("assets/images/signUp.jpg"),
               ),
               Row(
@@ -86,16 +85,15 @@ class _LoginPageState extends State<LoginPage> {
                   )
                 ],
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               Container(
-                //padding: const EdgeInsets.only(top: 35.0, left: 20.0, right: 20.0),
-                padding: EdgeInsets.fromLTRB(30.0, 10.0, 30.0, 10.0),
+                padding: const EdgeInsets.fromLTRB(30.0, 10.0, 30.0, 10.0),
                 width: 320.0,
-                height: 500.0,
+                height: 350.0,
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(20.0),
-                  boxShadow: [
+                  boxShadow: const [
                     BoxShadow(
                         color: Colors.black12,
                         offset: Offset(0.0, 15.0),
@@ -125,8 +123,6 @@ class _LoginPageState extends State<LoginPage> {
                               fontWeight: FontWeight.bold,
                               color: Colors.grey),
                           prefixIcon: Icon(Icons.alternate_email),
-                          // hintText: 'EMAIL',
-                          // hintStyle: ,
                           focusedBorder: UnderlineInputBorder(
                               borderSide: BorderSide(color: Colors.black))),
                     ),
@@ -152,37 +148,19 @@ class _LoginPageState extends State<LoginPage> {
                           focusedBorder: UnderlineInputBorder(
                               borderSide: BorderSide(color: Colors.black))),
                     ),
-                    const SizedBox(height: 100.0),
-                    SizedBox(
-                      height: 50.0,
-                      child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          shadowColor: Colors.blueAccent,
-                          backgroundColor: Colors.blue,
-                          elevation: 7.0, //elevation of button
-                          shape: RoundedRectangleBorder(
-                              //to set border radius to button
-                              borderRadius: BorderRadius.circular(20)),
-                        ),
-                        onPressed: () {
-                          if (_formKey.currentState!.validate()) {
-                            login();
-                          }
-                        },
-                        child: Center(
-                          child: isLoading
-                              ? const CircularProgressIndicator(
-                                  strokeWidth: 3,
-                                  color: Colors.white,
-                                )
-                              : const Text(
-                                  'LOGIN',
-                                  style: TextStyle(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold,
-                                      fontFamily: 'Montserrat'),
-                                ),
-                        ),
+                    const SizedBox(height: 40.0),
+                    MyElevatedButton(
+                      width: 250,
+                      onPressed: () {
+                        if (_formKey.currentState!.validate()) {
+                          login();
+                        }
+                      },
+                      borderRadius: BorderRadius.circular(20),
+                      child: const Text(
+                        'LOGIN',
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, letterSpacing: 1),
                       ),
                     ),
                     const SizedBox(

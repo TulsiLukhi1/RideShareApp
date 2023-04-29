@@ -4,6 +4,8 @@ import 'package:rideshare/Auth/loginscreen.dart';
 import 'package:rideshare/Auth/user_reqinfo.dart';
 import 'package:rideshare/Utills/utills.dart';
 
+import '../Widgets/mybutton.dart';
+
 class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});
 
@@ -61,9 +63,9 @@ class _SignUpPageState extends State<SignUpPage> {
           child: Container(
             child: Column(children: [
               const SizedBox(
-                height: 100,
+                height: 80,
               ),
-              Image(
+              const Image(
                 //
                 height: 250,
 
@@ -90,11 +92,11 @@ class _SignUpPageState extends State<SignUpPage> {
                 //padding: const EdgeInsets.only(top: 35.0, left: 20.0, right: 20.0),
                 padding: EdgeInsets.fromLTRB(30.0, 10.0, 30.0, 10.0),
                 width: 320.0,
-                height: 500.0,
+                height: 400.0,
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(20.0),
-                  boxShadow: [
+                  boxShadow: const [
                     BoxShadow(
                         color: Colors.black12,
                         offset: Offset(0.0, 15.0),
@@ -175,37 +177,19 @@ class _SignUpPageState extends State<SignUpPage> {
                           focusedBorder: UnderlineInputBorder(
                               borderSide: BorderSide(color: Colors.black))),
                     ),
-                    const SizedBox(height: 100.0),
-                    SizedBox(
-                      height: 50.0,
-                      child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          shadowColor: Colors.blueAccent,
-                          backgroundColor: Colors.blue,
-                          elevation: 7.0, //elevation of button
-                          shape: RoundedRectangleBorder(
-                              //to set border radius to button
-                              borderRadius: BorderRadius.circular(20)),
-                        ),
-                        onPressed: () {
-                          if (_formKey.currentState!.validate()) {
-                            signup();
-                          }
-                        },
-                        child: Center(
-                          child: isLoading
-                              ? const CircularProgressIndicator(
-                                  strokeWidth: 3,
-                                  color: Colors.white,
-                                )
-                              : const Text(
-                                  'Signup',
-                                  style: TextStyle(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold,
-                                      fontFamily: 'Montserrat'),
-                                ),
-                        ),
+                    const SizedBox(height: 40.0),
+                    MyElevatedButton(
+                      width: 250,
+                      onPressed: () {
+                        if (_formKey.currentState!.validate()) {
+                          signup();
+                        }
+                      },
+                      borderRadius: BorderRadius.circular(20),
+                      child: const Text(
+                        'SIGNUP',
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, letterSpacing: 1),
                       ),
                     ),
                     const SizedBox(

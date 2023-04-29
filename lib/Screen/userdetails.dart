@@ -41,25 +41,25 @@ class _UserDetailsScreenState extends State<UserDetailsScreen> {
     });
   }
 
-  // void signout() {
-  //   setState(() {
-  //     isLoading = true;
-  //   });
-  //   _auth.signOut().then((value) {
-  //     setState(() {
-  //       isLoading = false;
-  //     });
+  void signout() {
+    setState(() {
+      isLoading = true;
+    });
+    _auth.signOut().then((value) {
+      setState(() {
+        isLoading = false;
+      });
 
-  //     Utills().toastSuccessMessage("Successfully Loged out!");
-  //     Navigator.of(context).pushReplacement(MaterialPageRoute(
-  //         builder: (BuildContext context) => const LoginPage()));
-  //   }).catchError((error) {
-  //     Utills().toastFaiureMessage(error.message);
-  //     setState(() {
-  //       isLoading = false;
-  //     });
-  //   });
-  // }
+      Utills().toastSuccessMessage("Successfully Loged out!");
+      Navigator.of(context).pushReplacement(MaterialPageRoute(
+          builder: (BuildContext context) => const LoginPage()));
+    }).catchError((error) {
+      Utills().toastFaiureMessage(error.message);
+      setState(() {
+        isLoading = false;
+      });
+    });
+  }
 
   @override
   void initState() {
@@ -180,20 +180,20 @@ class _UserDetailsScreenState extends State<UserDetailsScreen> {
                 style: TextStyle(fontWeight: FontWeight.bold, letterSpacing: 1),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
-            // MyElevatedButton(
-            //   width: 250,
-            //   onPressed: () {
-            //     signout();
-            //   },
-            //   borderRadius: BorderRadius.circular(20),
-            //   child: const Text(
-            //     'LGOUT',
-            //     style: TextStyle(fontWeight: FontWeight.bold, letterSpacing: 1),
-            //   ),
-            // ),
+            MyElevatedButton(
+              width: 250,
+              onPressed: () {
+                signout();
+              },
+              borderRadius: BorderRadius.circular(20),
+              child: const Text(
+                'LGOUT',
+                style: TextStyle(fontWeight: FontWeight.bold, letterSpacing: 1),
+              ),
+            ),
           ],
         ),
       ),

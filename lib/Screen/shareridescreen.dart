@@ -379,7 +379,7 @@ class _ShareRideTabState extends State<ShareRideTab> {
                             style: const TextStyle(fontSize: 14),
                             controller: carController,
                             keyboardType: TextInputType.text,
-                            enabled: false,
+                            // enabled: false,
                             onTap: () {
                               Navigator.of(context).push(MaterialPageRoute(
                                   builder: (BuildContext context) =>

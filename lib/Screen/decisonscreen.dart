@@ -39,6 +39,13 @@ class _RenderScreenState extends State<RenderScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return isUserAdded ? UserDetailsScreen() : AccountTabScreen();
+    return isUserAdded
+        ? UserDetailsScreen()
+        : AccountTabScreen(
+            name: "",
+            profession: "",
+            dob: "",
+            org: "",
+          );
   }
 }

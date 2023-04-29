@@ -18,7 +18,11 @@ class AccountTabScreen extends StatefulWidget {
   final org;
 
   const AccountTabScreen(
-      {super.key, this.name, this.profession, this.dob, this.org});
+      {super.key,
+      required this.name,
+      required this.profession,
+      required this.dob,
+      required this.org});
 
   @override
   State<AccountTabScreen> createState() => _AccountTabScreenState();
@@ -50,25 +54,25 @@ class _AccountTabScreenState extends State<AccountTabScreen> {
     }
   }
 
-  // void signout() {
-  //   setState(() {
-  //     isLoading = true;
-  //   });
-  //   _auth.signOut().then((value) {
-  //     setState(() {
-  //       isLoading = false;
-  //     });
+  void signout() {
+    setState(() {
+      isLoading = true;
+    });
+    _auth.signOut().then((value) {
+      setState(() {
+        isLoading = false;
+      });
 
-  //     Utills().toastSuccessMessage("Successfully Loged out!");
-  //     Navigator.of(context).pushReplacement(MaterialPageRoute(
-  //         builder: (BuildContext context) => const LoginPage()));
-  //   }).catchError((error) {
-  //     Utills().toastFaiureMessage(error.message);
-  //     setState(() {
-  //       isLoading = false;
-  //     });
-  //   });
-  // }
+      Utills().toastSuccessMessage("Successfully Loged out!");
+      Navigator.of(context).pushReplacement(MaterialPageRoute(
+          builder: (BuildContext context) => const LoginPage()));
+    }).catchError((error) {
+      Utills().toastFaiureMessage(error.message);
+      setState(() {
+        isLoading = false;
+      });
+    });
+  }
 
   void saveuserinfo() {
     final User? user = _auth.currentUser;
@@ -111,6 +115,7 @@ class _AccountTabScreenState extends State<AccountTabScreen> {
     final User? user = _auth.currentUser;
     final uid = user?.uid;
     checkUser();
+
     dobController.text = widget.dob;
     nameController.text = widget.name;
     professionController.text = widget.profession;
@@ -129,20 +134,42 @@ class _AccountTabScreenState extends State<AccountTabScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        flexibleSpace: Container(
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.topRight,
+                colors: <Color>[
+                  Color.fromARGB(255, 100, 145, 236),
+                  Color.fromARGB(255, 69, 204, 231),
+                ]),
+          ),
+        ),
+        leading: GestureDetector(
+          child: const Icon(
+            Icons.arrow_back_ios,
+          ),
+          onTap: () {
+            Navigator.pop(context);
+          },
+        ),
+        title: const Text("Carpool"),
+      ),
       body: SingleChildScrollView(
         child: Form(
           key: _formKey,
           child: Container(
             child: Column(children: [
               const SizedBox(
-                height: 100,
+                height: 50,
               ),
               Row(
                 children: const [
                   Padding(
                     padding: EdgeInsets.fromLTRB(26, 10, 0.0, 0.0),
                     child: Text(
-                      "Add User",
+                      "User",
                       style: TextStyle(
                         fontFamily: "Montserrat",
                         fontSize: 60,
@@ -221,7 +248,7 @@ class _AccountTabScreenState extends State<AccountTabScreen> {
                       //editing controller of this TextField
                       decoration: const InputDecoration(
                           // icon: Icon(Icons.calendar_today), //icon of text field
-                          labelText: "Enter Date",
+                          labelText: "Date",
                           prefixIcon: Icon(Icons.calendar_today),
                           labelStyle: TextStyle(
                               fontFamily: 'Montserrat',
@@ -297,20 +324,20 @@ class _AccountTabScreenState extends State<AccountTabScreen> {
                     const SizedBox(
                       height: 20,
                     ),
-                    // MyElevatedButton(
-                    //   width: 250,
-                    //   onPressed: () {
-                    //     if (_formKey.currentState!.validate()) {
-                    //       signout();
-                    //     }
-                    //   },
-                    //   borderRadius: BorderRadius.circular(20),
-                    //   child: const Text(
-                    //     'LGOUT',
-                    //     style: TextStyle(
-                    //         fontWeight: FontWeight.bold, letterSpacing: 1),
-                    //   ),
-                    // ),
+                    MyElevatedButton(
+                      width: 250,
+                      onPressed: () {
+                        if (_formKey.currentState!.validate()) {
+                          signout();
+                        }
+                      },
+                      borderRadius: BorderRadius.circular(20),
+                      child: const Text(
+                        'LGOUT',
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, letterSpacing: 1),
+                      ),
+                    ),
                   ],
                 ),
               )

@@ -25,6 +25,7 @@ class _ShowRideScreenState extends State<ShowRideScreen> {
   @override
   void initState() {
     super.initState();
+    print("-------------------------inside showride screen-------------------------------")
     user = _auth.currentUser;
     uid = user?.uid;
     from = widget.from;
@@ -174,7 +175,7 @@ class _ShowRideScreenState extends State<ShowRideScreen> {
                       ],
                     ),
                     trailing: Icon(
-                      Icons.arrow_forward_ios,
+                      Icons.chat_outlined,
                       color: Colors.grey[600],
                     ),
                     onTap: () {
