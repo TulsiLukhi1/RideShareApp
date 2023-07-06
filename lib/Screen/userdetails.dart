@@ -186,11 +186,13 @@ class _UserDetailsScreenState extends State<UserDetailsScreen> {
             MyElevatedButton(
               width: 250,
               onPressed: () {
-                signout();
+                Utills().toastSuccessMessage("Successfully Loged out!");
+                Navigator.of(context).pushReplacement(MaterialPageRoute(
+                    builder: (BuildContext context) => const LoginPage()));
               },
               borderRadius: BorderRadius.circular(20),
               child: const Text(
-                'LGOUT',
+                'LOGOUT',
                 style: TextStyle(fontWeight: FontWeight.bold, letterSpacing: 1),
               ),
             ),

@@ -327,13 +327,11 @@ class _AccountTabScreenState extends State<AccountTabScreen> {
                     MyElevatedButton(
                       width: 250,
                       onPressed: () {
-                        if (_formKey.currentState!.validate()) {
-                          signout();
-                        }
+                        signout();
                       },
                       borderRadius: BorderRadius.circular(20),
                       child: const Text(
-                        'LGOUT',
+                        'LOGOUT',
                         style: TextStyle(
                             fontWeight: FontWeight.bold, letterSpacing: 1),
                       ),

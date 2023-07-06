@@ -46,7 +46,7 @@ class _CarDetailScreenState extends State<CarDetailScreen> {
       Utills().toastSuccessMessage("Car Information added successfully!");
       Navigator.pop(context);
       // Navigator.of(context)
-      //     .pushReplacement(MaterialPageRoute(
+      //     .push(MaterialPageRoute(
       //         builder: (BuildContext context) => const ShareRide()))
       //     .then(onGoBack);
     }).catchError((error) {

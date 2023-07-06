@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:rideshare/Auth/loginscreen.dart';
+import 'package:rideshare/Auth/mainloginscreen.dart';
 import 'package:rideshare/MainScreen/main_screen.dart';
 
 class MySplashScreen extends StatefulWidget {
@@ -30,7 +31,8 @@ class _MySplashScreenState extends State<MySplashScreen> {
   startTimer() {
     Timer(const Duration(seconds: 3), () async {
       //send user to home screen
-      Navigator.push(context, MaterialPageRoute(builder: (c) => LoginPage()));
+      Navigator.push(
+          context, MaterialPageRoute(builder: (c) => MainLoginScreen()));
     });
   }
 
