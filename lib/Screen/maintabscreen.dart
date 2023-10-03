@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 
 import 'package:open_street_map_search_and_pick/open_street_map_search_and_pick.dart';
+import 'package:rideshare/Chat/mainchatscreen.dart';
 import 'package:rideshare/Screen/requestridetab.dart';
 import 'package:rideshare/Screen/shareridescreen.dart';
 import 'package:latlong2/latlong.dart';
@@ -65,8 +66,8 @@ class _ScreenHomeTabState extends State<ScreenHomeTab>
               icon: const Icon(Icons.message_outlined),
               tooltip: 'Show Snackbar',
               onPressed: () {
-                ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                    content: Text('This is a for message functionality')));
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (c) => MainChatScreen()));
               },
             ),
             IconButton(

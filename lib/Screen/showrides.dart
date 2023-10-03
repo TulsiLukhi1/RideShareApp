@@ -39,6 +39,7 @@ class _ShowRideScreenState extends State<ShowRideScreen> {
         FirebaseDatabase.instance.ref().child("ShareRideInfo");
     DatabaseReference userRef =
         FirebaseDatabase.instance.ref().child("UserInfo");
+
     DatabaseEvent event = await ref.once();
     DataSnapshot snapshot = event.snapshot;
 
