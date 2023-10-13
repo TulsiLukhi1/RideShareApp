@@ -155,20 +155,8 @@ class _ShowRideScreenState extends State<ShowRideScreen> {
           itemCount: dataList.length,
           itemBuilder: (context, index) {
             return Container(
-              // padding: EdgeInsets.only(top: 15),
               decoration: const BoxDecoration(
-                // border: Border(bottom: BorderSide(color: Colors.black)),
-                boxShadow: [
-                  // BoxShadow(
-                  //   color: Color.fromARGB(255, 208, 208, 208),
-                  //   blurRadius: 2.0, // soften the shadow
-                  //   spreadRadius: 5.0, //extend the shadow
-                  //   offset: Offset(
-                  //     5.0, // Move to right 5  horizontally
-                  //     5.0, // Move to bottom 5 Vertically
-                  //   ),
-                  // )
-                ],
+                boxShadow: [],
                 color: Colors.white,
                 borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(30.0),

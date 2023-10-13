@@ -1,4 +1,9 @@
-// import 'package:firebase_auth/firebase_auth.dart';
+
+// static import 'package:cloud_firestore/cloud_firestore.dart';
+
+// static FirebaseFirestore firestore = FirebaseAuth.instance;
+
+// import 'package:firebase_auth/firebase_auth.dart'; 
 // import 'package:flutter/material.dart';
 
 // class ShowRideScreen extends StatefulWidget {
